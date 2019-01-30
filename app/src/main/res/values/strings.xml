@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Users</string>
+    <string name="user">User</string>
+    <string name="no_connection">no connection</string>
+    <string name="albums">Albums</string>
+    <string name="photos">photos</string>
+</resources>
