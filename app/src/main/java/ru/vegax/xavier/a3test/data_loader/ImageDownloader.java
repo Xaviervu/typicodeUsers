@@ -41,7 +41,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class ImageDownloader {
-    private static final String LOG_TAG = "ImageDownloader";
     private static final int TIMEOUT = 1000;
 
     public void download(String url, ImageView imageView, ProgressBar progressBar) {

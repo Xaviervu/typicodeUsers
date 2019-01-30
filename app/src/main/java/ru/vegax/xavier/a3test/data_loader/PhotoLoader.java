@@ -13,14 +13,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import ru.vegax.xavier.a3test.user_data.UserPhoto;
-
-
-import static android.os.AsyncTask.Status.FINISHED;
 
 
 public abstract class PhotoLoader implements LoaderCallback {
@@ -28,20 +24,13 @@ public abstract class PhotoLoader implements LoaderCallback {
     private static final int TIMEOUT = 1000;
 
     protected Map<Integer, ArrayList<UserPhoto>> mPhotos;
-    private static final String TAG = "PhotoLoader";
     private AsyncTask<String, Void, Void> mPhotoLoader;
 
-    public PhotoLoader(Map<Integer, ArrayList<UserPhoto>> photos) {
+    protected PhotoLoader(Map<Integer, ArrayList<UserPhoto>> photos) {
         mPhotos = photos;
         mPhotoLoader = new GetJSonPhotoAsync(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,  PHOTOS_URL);
     }
 
-    public void refreshData() {
-
-        if (mPhotoLoader.getStatus() == FINISHED) {
-            mPhotoLoader = new GetJSonPhotoAsync(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,  PHOTOS_URL);
-        }
-    }
     public void cancelTasks() {
 
         if (mPhotoLoader != null) {
@@ -127,9 +116,7 @@ public abstract class PhotoLoader implements LoaderCallback {
 
 
 
-    public Map<Integer, ArrayList<UserPhoto>> getPhotos() {
-        return mPhotos;
-    }
+
 
 
 }

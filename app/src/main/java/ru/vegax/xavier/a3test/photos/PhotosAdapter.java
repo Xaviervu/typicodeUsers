@@ -71,7 +71,7 @@ public abstract class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     }
 
-    public void setAlbumList(@NonNull ArrayList<UserPhoto> userAlbums){
+    void setAlbumList(@NonNull ArrayList<UserPhoto> userAlbums){
         mUserPhotos = userAlbums;
     }
 
@@ -100,14 +100,14 @@ public abstract class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 mTxtVPhoto.setText(currentItem.getTitle());
             }
         }
-        public ImageView getImageView() {
+        ImageView getImageView() {
             return mImageView;
         }
 
-        public TextView getTxtVPhoto() {
+        TextView getTxtVPhoto() {
             return mTxtVPhoto;
         }
-        public ProgressBar getProgressBar() {
+        ProgressBar getProgressBar() {
             return mProgressBar;
         }
     }

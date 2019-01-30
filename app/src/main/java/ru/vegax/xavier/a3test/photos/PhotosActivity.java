@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import ru.vegax.xavier.a3test.R;
@@ -84,13 +86,13 @@ public class PhotosActivity extends AppCompatActivity {
 
         private final int verticalSpaceHeight;
 
-        public VerticalSpaceItemDecoration(int verticalSpaceHeight) {
+        VerticalSpaceItemDecoration(int verticalSpaceHeight) {
             this.verticalSpaceHeight = verticalSpaceHeight;
         }
 
         @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                                   RecyclerView.State state) {
+        public void getItemOffsets(@NotNull Rect outRect, @NotNull View view, @NotNull RecyclerView parent,
+                                   @NotNull RecyclerView.State state) {
             outRect.bottom = verticalSpaceHeight;
         }
     }

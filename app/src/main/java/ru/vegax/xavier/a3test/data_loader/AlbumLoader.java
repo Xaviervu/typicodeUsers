@@ -21,29 +21,19 @@ import java.util.Objects;
 import ru.vegax.xavier.a3test.user_data.UserAlbum;
 
 
-
-import static android.os.AsyncTask.Status.FINISHED;
-
-
 public abstract class AlbumLoader implements LoaderCallback {
     private static final String ALBUMS_URL = "http://jsonplaceholder.typicode.com./albums";
     private static final int TIMEOUT = 1000;
     protected Map<Integer, List<UserAlbum>> mAlbums;
 
-    private static final String TAG = "AlbumLoader";
     private AsyncTask<String, Void, Void> mAlbumLoader;
 
-    public AlbumLoader(@NonNull Map<Integer, List<UserAlbum>> albums) {
+    protected AlbumLoader(@NonNull Map<Integer, List<UserAlbum>> albums) {
         mAlbums = albums;
         mAlbumLoader = new GetJSonAlbumsAsync(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,  ALBUMS_URL);
     }
 
-    public void refreshData() {
 
-        if (mAlbumLoader.getStatus() == FINISHED) {
-            mAlbumLoader = new GetJSonAlbumsAsync(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, ALBUMS_URL);
-        }
-    }
     public void cancelTasks() {
 
         if (mAlbumLoader != null) {
@@ -130,7 +120,4 @@ public abstract class AlbumLoader implements LoaderCallback {
         }
     }
 
-    public Map<Integer, List<UserAlbum>> getAlbums() {
-        return mAlbums;
-    }
 }

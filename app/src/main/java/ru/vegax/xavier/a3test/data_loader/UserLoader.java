@@ -19,29 +19,19 @@ import ru.vegax.xavier.a3test.user_data.Company;
 import ru.vegax.xavier.a3test.user_data.Geo;
 import ru.vegax.xavier.a3test.user_data.User;
 
-
-import static android.os.AsyncTask.Status.FINISHED;
-
-
 public abstract class UserLoader implements LoaderCallback {
     private static final String USERS_URL = "http://jsonplaceholder.typicode.com./users";
     private static final int TIMEOUT = 1000;
 
     private Map<Integer, User> mUsers;
-    private static final String TAG = "UserLoader";
     private AsyncTask<String, Void, Void> mUserLoader;
 
-    public UserLoader(@NonNull Map<Integer, User> users) {
+    protected UserLoader(@NonNull Map<Integer, User> users) {
         mUsers = users;
         mUserLoader = new GetJSonUsersAsync(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, USERS_URL);
     }
 
-    public void refreshData() {
 
-        if (mUserLoader.getStatus() == FINISHED) {
-            mUserLoader = new GetJSonUsersAsync(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, USERS_URL);
-        }
-    }
 
     public void cancelTasks() {
 
@@ -125,7 +115,4 @@ public abstract class UserLoader implements LoaderCallback {
         }
     }
 
-    public Map<Integer, User> getUsers() {
-        return mUsers;
-    }
 }
