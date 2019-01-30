@@ -1,11 +1,11 @@
 # typicodeUsers
-showing user from https://jsonplaceholder.typicode.com./ albums and photos without using external libraries
+showing user from http://jsonplaceholder.typicode.com./ albums and photos without using external libraries
 The task was to show 3 activities without using external libraries: Users, Albums and photos  using data from 
-https://jsonplaceholder.typicode.com/
+http://jsonplaceholder.typicode.com/
 
-https://jsonplaceholder.typicode.com./users
+http://jsonplaceholder.typicode.com./users
 http://jsonplaceholder.typicode.com./albums
-https://jsonplaceholder.typicode.com./photos
+http://jsonplaceholder.typicode.com./photos
 
 https://github.com/Xaviervu/typicodeUsers/blob/master/screenshots/1.jpg?raw=true
 
