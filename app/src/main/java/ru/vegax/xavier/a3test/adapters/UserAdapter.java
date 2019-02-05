@@ -1,4 +1,4 @@
-package ru.vegax.xavier.a3test.albums;
+package ru.vegax.xavier.a3test.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,30 +6,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Objects;
 
 import ru.vegax.xavier.a3test.R;
-import ru.vegax.xavier.a3test.user_data.UserAlbum;
+import ru.vegax.xavier.a3test.models.User;
 
+public abstract class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
 
-public abstract class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
-
-    private List<UserAlbum> mUserAlbums;
+    //Member variables
+    private List<User> mUsers;
     private Context mContext;
 
 
-    AlbumsAdapter(@NonNull Context context, @NonNull List<UserAlbum> userAlbums) {
-        mUserAlbums = userAlbums;
+    protected UserAdapter(@NonNull Context context) {
         mContext = context;
     }
 
     @Override
     public int getItemCount() {
-
-        return mUserAlbums.size();
+        if (mUsers != null){
+            return mUsers.size();
+        }
+        return 0;
     }
 
 
@@ -37,7 +40,7 @@ public abstract class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new ViewHolderUserAlbums(LayoutInflater.from(mContext).inflate(R.layout.list_item_user, parent, false));
+        return new ViewHolderUsers(LayoutInflater.from(mContext).inflate(R.layout.list_item_user, parent, false));
 
 
     }
@@ -46,9 +49,9 @@ public abstract class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        ViewHolderUserAlbums viewHolderUsers = (ViewHolderUserAlbums) holder;
+        ViewHolderUsers viewHolderUsers = (ViewHolderUsers) holder;
         //Get current item
-        UserAlbum currentItem = mUserAlbums.get(position);
+        User currentItem = mUsers.get(position);
 
         viewHolderUsers.bindTo(currentItem);
 
@@ -57,16 +60,20 @@ public abstract class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         //disable swipe for the switch, only click on the item will trigger the output
 
         if (currentItem != null) {
-            textView.setTag(currentItem.getId()); // album Id
+            textView.setTag(currentItem.getId());
             textView.setOnClickListener(this);
         }
     }
-
-    public void setAlbumList(@NonNull ArrayList<UserAlbum> userAlbums){
-        mUserAlbums = userAlbums;
+    private User getElementByIndex(LinkedHashMap map, int index){
+        return (User) map.get( (Objects.requireNonNull(map.keySet().toArray()))[ index ] );
     }
 
-    class ViewHolderUserAlbums extends RecyclerView.ViewHolder {
+    public void setUserList(List<User> users) {
+        mUsers = users;
+        notifyDataSetChanged();
+    }
+
+    class ViewHolderUsers extends RecyclerView.ViewHolder {
 
         private TextView mTxtVUser;
 
@@ -75,15 +82,15 @@ public abstract class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
 
-        ViewHolderUserAlbums(View itemView) {
+        ViewHolderUsers(View itemView) {
             super(itemView);
             //Initialize the views
             mTxtVUser = itemView.findViewById(R.id.txtVUser);
         }
 
-        void bindTo(UserAlbum currentItem) {
+        void bindTo(User currentItem) {
             if (currentItem!= null){
-            mTxtVUser.setText(currentItem.getTitle());
+            mTxtVUser.setText(currentItem.getName());
             }
         }
     }
