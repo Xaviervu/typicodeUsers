@@ -1,5 +1,5 @@
 # typicodeUsers
-showing user from http://jsonplaceholder.typicode.com./ albums and photos without using external libraries
+showing user from http://jsonplaceholder.typicode.com./ albums and photos using external libraries Glide and Retrofit2 in Kotlin. for the version without external libraries in Java press [Here](https://github.com/Xaviervu/typicodeNoLibs).
 The task was to show 3 activities without using external libraries: Users, Albums and photos  using data from 
 http://jsonplaceholder.typicode.com/
 
